@@ -7,12 +7,20 @@ with lib; let
   inherit (flake-parts-lib) mkPerSystemOption;
   pluginSpec = with types; {
     options = {
+      enabled = mkOption {
+        type = nullOr (oneOf [bool str]);
+        default = null;
+      };
       src = mkOption {
         type = nullOr (oneOf [attrs path]);
         default = null;
       };
       package = mkOption {
         type = nullOr package;
+        default = null;
+      };
+      dev = mkOption {
+        type = nullOr bool;
         default = null;
       };
       name = mkOption {
@@ -43,12 +51,20 @@ with lib; let
         type = nullOr (oneOf [str (listOf str)]);
         default = null;
       };
+      cmd = mkOption {
+        type = nullOr (oneOf [str (listOf str)]);
+        default = null;
+      };
       ft = mkOption {
         type = nullOr (oneOf [str (listOf str)]);
         default = null;
       };
       keys = mkOption {
-        type = nullOr (oneOf [str (listOf str)]);
+        type = nullOr str;
+        default = null;
+      };
+      main = mkOption {
+        type = nullOr str;
         default = null;
       };
       priority = mkOption {
