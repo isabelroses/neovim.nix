@@ -89,41 +89,21 @@
         "type": "github"
       }
     },
-    "lazy-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1678889456,
-        "narHash": "sha256-R+sfPOuWfwbrNXUiKQcb8MHYqK+o5Pw8gkEaYaidqp0=",
-        "owner": "folke",
-        "repo": "lazy.nvim",
-        "rev": "6b55862d2d264f0b48e0b9e42cc2d14f136bed55",
-        "type": "github"
-      },
-      "original": {
-        "owner": "folke",
-        "repo": "lazy.nvim",
-        "type": "github"
-      }
-    },
     "neovim-nix": {
       "inputs": {
         "flake-parts": "flake-parts_2",
-        "lazy-nvim": "lazy-nvim",
         "nixpkgs": "nixpkgs",
         "pre-commit-nix": "pre-commit-nix"
       },
       "locked": {
-        "lastModified": 1710401652,
-        "narHash": "sha256-30WnQHknw7JHndn4/9S0ZtatHiXr5sofmRZkb43GH5Q=",
-        "owner": "willruggiano",
-        "repo": "neovim.nix",
-        "rev": "f73391e007bee33ac81896c47e9de5f5ef214eb6",
-        "type": "github"
+        "lastModified": 0,
+        "narHash": "sha256-Ph4iMuf4d5bkoPN3/6DUIt72o2H7IjcTpv9Wkb+S7K4=",
+        "path": "../",
+        "type": "path"
       },
       "original": {
-        "owner": "willruggiano",
-        "repo": "neovim.nix",
-        "type": "github"
+        "path": "../",
+        "type": "path"
       }
     },
     "nixpkgs": {

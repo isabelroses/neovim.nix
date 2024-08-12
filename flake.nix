@@ -5,31 +5,41 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-nix.url = "github:cachix/pre-commit-hooks.nix";
+
+    lanzaboote.url = "github:nix-community/lanzaboote";
+    lanzaboote.inputs.pre-commit-hooks-nix.follows = "";
   };
 
-  outputs = {
-    nixpkgs,
-    flake-parts,
-    self,
-    ...
-  } @ inputs:
-    flake-parts.lib.mkFlake {inherit self inputs;} {
-      imports = nixpkgs.lib.optional (inputs.pre-commit-nix ? flakeModule) inputs.pre-commit-nix.flakeModule;
+  outputs =
+    {
+      nixpkgs,
+      flake-parts,
+      self,
+      ...
+    }@inputs:
+    flake-parts.lib.mkFlake { inherit self inputs; } {
+      imports = [
+        inputs.lanzaboote.flakeModule
+      ] ++ nixpkgs.lib.optional (inputs.pre-commit-nix ? flakeModule) inputs.pre-commit-nix.flakeModule;
 
       flake = {
         flakeModule = {
-          imports = [./modules];
+          imports = [ ./modules ];
         };
       };
 
-      systems = ["aarch64-darwin" "x86_64-linux"];
-      perSystem = {
-        config,
-        inputs',
-        pkgs,
-        system,
-        ...
-      }:
+      systems = [
+        "aarch64-darwin"
+        "x86_64-linux"
+      ];
+      perSystem =
+        {
+          config,
+          inputs',
+          pkgs,
+          system,
+          ...
+        }:
         {
           apps = {
             check.program = pkgs.writeShellApplication {
@@ -49,7 +59,7 @@
           formatter = pkgs.alejandra;
 
           packages = {
-            utils = pkgs.callPackage ./utils.nix {};
+            utils = pkgs.callPackage ./utils.nix { };
           };
         }
         // nixpkgs.lib.optionalAttrs (inputs.pre-commit-nix ? flakeModule) {
